@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>index</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<meta charset="utf-8">
+</head>
+<body>
+
+<div class="page">
+	<header class="header">
+	</header>
+	<main class="content">
+		<div class="wrap">
+			<a href="#" class="triang triang--1" style="top:0; right: 52%; background-image: url(img/1.png)"></a>
+			<a href="#" class="triang triang--2" style="top:0; left: 52%; background-image: url(img/2.png)"></a>
+			<a href="#" class="triang triang--3" style="bottom:50%; background-image: url(img/3.png)"></a>
+			<a href="#" class="triang triang--4" style="top:51%; background-image: url(img/41.png)"></a>
+			<a href="#" class="triang triang--1" style="bottom: 0; right: 52%; background-image: url(img/1_2.png)"></a>
+			<a href="#" class="triang triang--2" style="bottom:0; left: 52%; background-image: url(img/2_22.png)"></a>
+			<a href="#" class="triang triang--3" style="bottom:50%; right: 0; background-image: url(img/3_2.png)"></a>
+			<a href="#" class="triang triang--4" style="top:51%; right: 0; background-image: url(img/4_2.png)"></a>
+		</div>
+		
+	</main>
+</div>	
+	<script type="text/javascript" src="data.js"></script>
+	<script type="text/javascript">
+		let block = document.querySelectorAll(".triang");
+	let start = ()=>{
+		[].forEach.call(block, function(block){
+			block.style.transform = 'translate('+getRandomInt(500,1000)+'px,'+
+			''+getRandomInt(-1000,1000)+'px) rotate('+getRandomInt(500,2000)+'deg)';
+		})
+		setTimeout(posEnd,0000);
+	}
+	
+	function getRandomInt(min, max) {
+	  min = Math.ceil(min);
+	  max = Math.floor(max);
+	  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+	}
+	let posEnd = function(){
+			[].forEach.call(block, function(block){
+				block.style.transform = 'translate(0) rotate(0)';
+			})
+		setTimeout(listeners,3000);
+	}
+	start();
+		let listeners = function(){
+			for(let i = 0,l = block.length; i < l;i++){
+				block[i].style.transition = '1s';
+				block[i].addEventListener("mouseover", function(){
+					block[i].style.transform = 'scale(1.5)';
+					block[i].classList.add("triang--open");
+					block[i].style.backgroundImage = 'url('+data[i].img+')';
+					block[i].style.zIndex = '2';
+				});
+				block[i].addEventListener("mouseout", function(){
+					block[i].style.backgroundImage = 'url('+data[i].alt+')';
+					block[i].classList.remove("triang--open");
+					block[i].style.transform = 'scale(1)';
+					block[i].style.zIndex = '1';
+				});
+			}
+	}
+	</script>
+</body>
+</html>
